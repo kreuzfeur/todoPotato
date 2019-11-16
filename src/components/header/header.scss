@@ -1,0 +1,18 @@
+header {
+    .headerLogo, .headerPanelType, .headerUserInfo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .headerLogo {
+        padding: 5px 0;
+        img{
+            max-width: 200px;
+        }
+    }
+    .headerUserInfo{
+        button{
+            margin-left: 5px;
+        }
+    }
+}
