@@ -6,7 +6,7 @@ import { BibapiConsumer } from '../bibapi-service-context';
 const withBibapi = (Wrapped) => {
     return (props) => {
         return (
-            <BibapiConsumer>
+            <BibapiConsumer >
                 {
                     (bibapi) => {
                         return (

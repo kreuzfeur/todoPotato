@@ -7,7 +7,7 @@ const updateHeader = (state, action) => {
     }
     switch (action) {
         default:
-            return state
+            return state.header
     }
 }
 

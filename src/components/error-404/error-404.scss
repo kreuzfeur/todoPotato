@@ -1,0 +1,9 @@
+.error404{
+    height: 100vh;
+    .error404Container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

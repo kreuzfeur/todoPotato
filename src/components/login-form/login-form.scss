@@ -1,0 +1,19 @@
+.loginForm{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .formContainer{
+        position: relative;
+        border: 2px solid #1dad10;
+        padding: 20px;
+        border-radius: 10px;
+        .form-text{
+            height: 20px;
+        }
+        .fieldMessage{
+            transition: all 700ms;
+        }
+    }
+}

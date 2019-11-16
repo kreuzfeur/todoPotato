@@ -1,18 +1,20 @@
 //react
 import React, { Component } from 'react';
+//router
+import { withRouter } from 'react-router-dom';
 //components
 import Header from '../header';
 import { withBibapi } from '../hoc';
 
-class HeaderContainer extends Component{
-    componentDidMount() {
-        this.props.bibapi.getUser()
-    }
-    clearLocalStorage = () => localStorage.clear();
+class HeaderContainer extends Component {
+    clearLocalStorage = () => {
+        localStorage.clear();
+        this.props.history.push('/login');
+    };
     render() {
         return (
-            <Header clearLocalStorage={this.clearLocalStorage}/>
+            <Header clearLocalStorage={this.clearLocalStorage} />
         )
     }
 }
-export default withBibapi(HeaderContainer);
+export default withRouter(withBibapi(HeaderContainer));
