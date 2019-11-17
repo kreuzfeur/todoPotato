@@ -8,7 +8,7 @@ import { Redirect } from 'react-router-dom';
 const usersService = new UsersService();
 const HomePage = () => {
     return (
-        <Redirect to={`/${usersService.changeUrlByRole()}`} />
+        <Redirect to={`/${usersService.changeUrlByRole()}/`} />
     )
 }
 export default HomePage;

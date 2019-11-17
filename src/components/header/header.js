@@ -4,6 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 //styles
 import './header.scss';
+import logo from '../../img/logo.png';
 
 const Header = ({ data, clearLocalStorage, installPanelType }) => {
     const {user, role} = data;
@@ -11,7 +12,7 @@ const Header = ({ data, clearLocalStorage, installPanelType }) => {
         <header className="row bg-success text-white">
             <div className="col-4 headerLogo">
                 <Link to="/">
-                    <img src="./img/logo.png" alt="main logo" />
+                    <img src={logo} alt="main logo" />
                 </Link>
             </div>
             <div className="col-4 headerPanelType">

@@ -13,6 +13,8 @@ import { BibapiProvider } from './components/bibapi-service-context';
 //services
 import {Bibapi} from './services';
 //styles
+import './bootstrap.min.css';
+
 
 const bibapi = new Bibapi();
 ReactDOM.render(

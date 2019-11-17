@@ -2,6 +2,7 @@
 import React from 'react';
 //styles
 import './login-form.scss';
+import logo from '../../img/logoPutcko.jpg';
 
 const LoginForm = ({loginForm, loadingIndicator, changeDisabled, onLogin, onLoginChange, onPasswordChange}) => {
     const { login, password, passwordFieldMessage, loginFieldMessage, serverMessage } = loginForm;
@@ -9,7 +10,7 @@ const LoginForm = ({loginForm, loadingIndicator, changeDisabled, onLogin, onLogi
         <form className="loginForm" onSubmit={onLogin}>
             <div className='formContainer'>
                 {loadingIndicator}
-                <img src="./img/logoPutcko.jpg" alt="logo putcko" className='mb-2 mt-2' />
+                <img src={logo} alt="logo putcko" className='mb-2 mt-2' />
                 <div className='form-group mb-0'>
                     <label htmlFor="loginField">Логин:</label>
                     <input
