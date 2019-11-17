@@ -1,6 +1,7 @@
 import axios from 'axios';
 axios.defaults.baseURL = 'https://polyacovda.ru/potatoTodoApi/public/api/';
-axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+axios.defaults.headers.common['Accept'] = 'application/json';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 export default class Bibapi {
     login = (username, password) => {
@@ -8,7 +9,7 @@ export default class Bibapi {
             method: 'post',
             url: '/login',
             data: {
-                name: username,
+                username,
                 password
             }
         });

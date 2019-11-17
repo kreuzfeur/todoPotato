@@ -1,14 +1,14 @@
 //react
 import React from 'react';
-//components
-import { HeaderContainer } from '../containers/';
-import IsLoggedIn from '../isLoggedIn/';
+//services
+import { UsersService } from '../../services';
+//router
+import { Redirect } from 'react-router-dom';
 
+const usersService = new UsersService();
 const HomePage = () => {
     return (
-        <IsLoggedIn>
-            <HeaderContainer />
-        </IsLoggedIn>
+        <Redirect to={`/${usersService.changeUrlByRole()}`} />
     )
 }
 export default HomePage;

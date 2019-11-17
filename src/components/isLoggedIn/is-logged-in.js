@@ -1,17 +1,19 @@
 //react
 import React from 'react';
 //router
-import { Redirect } from 'react-router-dom';
-//redux
-import { connect } from 'react-redux';
+import { Redirect, withRouter } from 'react-router-dom';
 
-const IsLoggedIn = (props) => {
-    if (!props.token) return <Redirect to='/login' />
-    return props.children
-}
-const mapStateToProps = (state) => {
-    return {
-        token: state.isLoggedIn.token
+const IsLoggedIn = ({ history, children }) => {
+    const token = localStorage.getItem('token');
+    if (!token) return <Redirect to='/login' />
+    const path = history.location.pathname;
+    const role = localStorage.getItem('role')
+    if (path.indexOf(role) !== -1) {
+        return children
+    } else {
+        return <Redirect to='/login' />
     }
+
 }
-export default connect(mapStateToProps)(IsLoggedIn);
+
+export default withRouter(IsLoggedIn);

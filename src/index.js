@@ -11,7 +11,7 @@ import App from './components/app';
 import ErrorBoundry from './components/error-boundry';
 import { BibapiProvider } from './components/bibapi-service-context';
 //services
-import Bibapi from './services/bibapi';
+import {Bibapi} from './services';
 //styles
 
 const bibapi = new Bibapi();
