@@ -13,6 +13,9 @@ const TopMenu = () => {
                     <NavLink className="nav-link" to="addUser" activeClassName='active' exact>Добавить пользователя</NavLink>
                 </li>
                 <li className="nav-item">
+                    <NavLink className="nav-link" to="editUser" activeClassName='active' exact>Изменить пользователя</NavLink>
+                </li>
+                <li className="nav-item">
                     <NavLink className="nav-link" to="another" activeClassName='active' exact>Что-то еще</NavLink>
                 </li>
             </ul>

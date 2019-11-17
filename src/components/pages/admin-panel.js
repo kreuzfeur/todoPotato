@@ -5,17 +5,22 @@ import { HeaderContainer } from '../containers/';
 import IsLoggedIn from '../isLoggedIn/';
 import TopMenu from '../top-menu';
 //router
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
+//components
+import {AddUserContainer} from '../containers';
 
 const AdminPanelPage = () => {
+    document.titel = 'Панель администратор';
     return (
         <IsLoggedIn>
             <HeaderContainer />
             <div className="row">
                 <TopMenu />
             </div>
-            <Route path='/adminPanel/addUser' render={() => <div>add</div>} />
-            <Route path='/adminPanel/another' render={() => <div>an</div>} />
+            <Redirect to='/adminPanel/addUser' />
+            <Route path='/adminPanel/addUser' component={AddUserContainer} />
+            <Route path='/adminPanel/another' render={() => <div>another</div>} />
+            <Route path='/adminPanel/editUser' render={() => <div>Edit user</div>} />
         </IsLoggedIn>
     )
 }

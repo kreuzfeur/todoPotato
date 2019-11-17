@@ -23,6 +23,9 @@ import { UsersService } from '../../services';
 
 const usersService = new UsersService();
 class LoginFormContainer extends Component {
+    componentDidMount() {
+        document.title = 'Вход'
+    }
     onLogin = (evt) => {
         evt.preventDefault();
         const { fetchLoginFormPending, fetchLoginFormSuccess, fetchLoginFormError, bibapi, history, changeLoginFieldMessage, changePasswordFieldMessage } = this.props;

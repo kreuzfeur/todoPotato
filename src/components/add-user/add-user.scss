@@ -1,0 +1,11 @@
+.addUser{
+    height: calc(100vh - 138px);
+    justify-content: center;
+    align-items: center;
+    form{
+        position: relative;
+        select{
+            text-align-last: center;
+        }
+    }
+}
