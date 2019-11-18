@@ -5,7 +5,7 @@ import './login-form.scss';
 import logo from '../../img/logoPutcko.jpg';
 
 const LoginForm = ({loginForm, loadingIndicator, changeDisabled, onLogin, onLoginChange, onPasswordChange}) => {
-    const { login, password, passwordFieldMessage, loginFieldMessage, serverMessage } = loginForm;
+    const { login, password, serverMessage } = loginForm;
     return (
         <form className="loginForm" onSubmit={onLogin}>
             <div className='formContainer'>
@@ -21,7 +21,6 @@ const LoginForm = ({loginForm, loadingIndicator, changeDisabled, onLogin, onLogi
                         onChange={(evt) => onLoginChange(evt)}
                         value={login}>
                     </input>
-                    <small className="form-text text-danger fieldMessage ">{loginFieldMessage}</small>
                 </div>
                 <div className='form-group mb-0'>
                     <label htmlFor="passwordField">Пароль:</label>
@@ -33,9 +32,8 @@ const LoginForm = ({loginForm, loadingIndicator, changeDisabled, onLogin, onLogi
                         onChange={(evt) => onPasswordChange(evt)}
                         value={password}>
                     </input>
-                    <small className="form-text text-danger fieldMessage ">{passwordFieldMessage}</small>
                 </div>
-                <button type="submit" className="btn btn-outline-success btn-block mt-2" disabled={changeDisabled()}>Войти</button>
+                <button type="submit" className="btn btn-outline-success btn-block" disabled={changeDisabled()}>Войти</button>
                 <small className="form-text text-danger text-center">{serverMessage}</small>
             </div>
         </form>

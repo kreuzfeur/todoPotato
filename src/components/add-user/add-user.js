@@ -4,7 +4,7 @@ import React from 'react';
 import './add-user.scss';
 import logo from '../../img/logoPutcko.jpg';
 
-const AddUser = ({ onAddUser, loader, roleItems }) => {
+const AddUser = ({ onAddUser, loader, roleItems, serverMessageItems, login, password, passwordConfirmation, onLoginChange, onPasswordChange, onPasswordConfirmationChange, changeDisabled, onRoleChange }) => {
     return (
         <section className="addUser row">
             <div className="col-5 text-center">
@@ -14,24 +14,24 @@ const AddUser = ({ onAddUser, loader, roleItems }) => {
                     {loader}
                     <div className="row">
                         <div className="col">
-                            <input type="text" className="form-control" placeholder="Логин" />
+                            <input type="text" className="form-control" placeholder="Логин" value={login} onChange={(evt) => onLoginChange(evt.target.value)} />
                         </div>
                         <div className="col">
-                            <input type="password" className="form-control" placeholder="Пароль" />
+                            <input type="password" className="form-control" placeholder="Пароль" value={password} onChange={(evt) => onPasswordChange(evt.target.value)} />
                         </div>
                         <div className="col">
-                            <input type="password" className="form-control" placeholder="Пароль" />
+                            <input type="password" className="form-control" placeholder="Пароль" value={passwordConfirmation} onChange={(evt) => onPasswordConfirmationChange(evt.target.value)} />
                         </div>
-                        <div className="col-4">
-                            <select id="inputState" className="form-control">
+                        <div className="col">
+                            <select id="inputState" className="form-control" onChange={(evt) => onRoleChange(evt.target.value)}>
                                 {roleItems}
                             </select>
                         </div>
                         <div className="col">
-                            <button type="submit" className="btn btn-success">Добавить</button>
+                            <button type="submit" className="btn btn-success" disabled={changeDisabled()}>Добавить</button>
                         </div>
                         <div className="col-12">
-                            <small className="form-text text-danger text-center">123</small>
+                            {serverMessageItems}
                         </div>
                     </div>
                 </form>

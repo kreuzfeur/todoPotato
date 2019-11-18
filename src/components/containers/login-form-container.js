@@ -1,9 +1,10 @@
 //react
 import React, { Component } from 'react';
 //components
-import { withBibapi } from '../hoc';
+import { withBibapi, withResponseHandle } from '../hoc';
 import Loader from '../loader';
 import LoginForm from '../login-form/';
+import {ResponseHandlingMessagesContainer} from '../containers';
 //redux
 import { connect } from 'react-redux';
 //actions
@@ -12,9 +13,7 @@ import {
     fetchLoginFormPending,
     fetchLoginFormError,
     changePasswordInputValue,
-    changeLoginInputValue,
-    changePasswordFieldMessage,
-    changeLoginFieldMessage
+    changeLoginInputValue
 } from '../../actions';
 //router
 import { withRouter } from 'react-router-dom';
@@ -28,27 +27,22 @@ class LoginFormContainer extends Component {
     }
     onLogin = (evt) => {
         evt.preventDefault();
-        const { fetchLoginFormPending, fetchLoginFormSuccess, fetchLoginFormError, bibapi, history, changeLoginFieldMessage, changePasswordFieldMessage } = this.props;
+        const { fetchLoginFormPending, fetchLoginFormSuccess, fetchLoginFormError, bibapi, history, responseHandleSuccess, responseHandleError } = this.props;
         const { login, password } = this.props.loginForm;
-        if (!login) return changeLoginFieldMessage();
-        if (!password) return changePasswordFieldMessage();
         fetchLoginFormPending();
         bibapi.login(login, password)
             .then((response) => {
-                const { status, data } = response;
-                if (status === 200) {
-                    fetchLoginFormSuccess()
-                    const { token, user: { username, role } } = data;
-                    localStorage.setItem('token', token);
-                    localStorage.setItem('username', username);
-                    localStorage.setItem('role', role);
-                    history.push(`/${usersService.changeUrlByRole()}`);
-                }
+                const data = responseHandleSuccess(response);
+                fetchLoginFormSuccess()
+                const { token, user: { username, role } } = data;
+                localStorage.setItem('token', token);
+                localStorage.setItem('username', username);
+                localStorage.setItem('role', role);
+                history.push(`/${usersService.changeUrlByRole()}`);
             })
-            .catch(({ response }) => {
-                if (response.data) {
-                    fetchLoginFormError(response.data.error.message);
-                }
+            .catch((response) => {
+                const errorMessage = responseHandleError(response)
+                fetchLoginFormError(errorMessage);
             })
     }
     onLoginChange = (evt) => {
@@ -66,24 +60,27 @@ class LoginFormContainer extends Component {
         }
     }
     render() {
-        const { loading } = this.props.loginForm;
+        const { loading, responseErrorMessage, responseSuccessMessage } = this.props.loginForm;
         const loadingIndicator = (loading) ? <Loader /> : null;
         return (
-            <LoginForm
-                loadingIndicator={loadingIndicator}
-                loginForm={this.props.loginForm}
-                changeDisabled={this.changeDisabled}
-                onLogin={this.onLogin}
-                onLoginChange={this.onLoginChange}
-                onPasswordChange={this.onPasswordChange}
-            />
+            <div>
+                <ResponseHandlingMessagesContainer errors={responseErrorMessage} success={responseSuccessMessage}/>
+                <LoginForm
+                    loadingIndicator={loadingIndicator}
+                    loginForm={this.props.loginForm}
+                    changeDisabled={this.changeDisabled}
+                    onLogin={this.onLogin}
+                    onLoginChange={this.onLoginChange}
+                    onPasswordChange={this.onPasswordChange}
+                />
+            </div>
         )
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({loginForm}) => {
     return {
-        loginForm: state.loginForm
+        loginForm
     }
 }
 const mapDispatchToPRops = {
@@ -92,7 +89,5 @@ const mapDispatchToPRops = {
     fetchLoginFormError,
     changePasswordInputValue,
     changeLoginInputValue,
-    changePasswordFieldMessage,
-    changeLoginFieldMessage
 }
-export default connect(mapStateToProps, mapDispatchToPRops)(withRouter(withBibapi(LoginFormContainer)));
+export default connect(mapStateToProps, mapDispatchToPRops)(withRouter(withResponseHandle(withBibapi(LoginFormContainer))));

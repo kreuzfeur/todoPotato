@@ -10,7 +10,15 @@ import {
 import {
     fetchAddUserFormGetRolesPending,
     fetchAddUserFormGetRolesError,
-    fetchAddUserFormGetRolesSuccess
+    fetchAddUserFormGetRolesSuccess,
+    fetchAddUserFormPending,
+    fetchAddUserFormSuccess,
+    fetchAddUserFormError,
+    addUserFormLoginInputChange,
+    addUserFormPasswordInputChange,
+    addUserFormPasswordConfirmationInputChange,
+    changeRole
+
 } from './add-user-form-actions'
 export {
     fetchLoginFormSuccess,
@@ -18,9 +26,14 @@ export {
     fetchLoginFormError,
     changePasswordInputValue,
     changeLoginInputValue,
-    changePasswordFieldMessage,
-    changeLoginFieldMessage,
     fetchAddUserFormGetRolesPending,
     fetchAddUserFormGetRolesError,
-    fetchAddUserFormGetRolesSuccess
+    fetchAddUserFormGetRolesSuccess,
+    fetchAddUserFormPending,
+    fetchAddUserFormSuccess,
+    fetchAddUserFormError,
+    addUserFormLoginInputChange,
+    addUserFormPasswordInputChange,
+    addUserFormPasswordConfirmationInputChange,
+    changeRole
 }

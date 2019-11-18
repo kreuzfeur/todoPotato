@@ -4,9 +4,8 @@ const updateLoginForm = (state, action) => {
             loading: false,
             login: '',
             password: '',
-            passwordFieldMessage: '',
-            loginFieldMessage: '',
-            serverMessage: ''
+            responseErrorMessage: null,
+            responseSuccessMessage: null
         }
     }
     switch (action.type) {
@@ -19,35 +18,24 @@ const updateLoginForm = (state, action) => {
             return {
                 ...state.loginForm,
                 loading: true,
-                serverMessage: ''
+                responseErrorMessage: '',
+                responseSuccessMessage: ''
             }
         case 'FETCH_LOGIN_FORM_ERROR':
             return {
                 ...state.loginForm,
                 loading: false,
-                serverMessage: action.payload
+                responseErrorMessage: action.payload
             }
         case 'CHANGE_PASSWORD_INPUT_VALUE':
             return {
                 ...state.loginForm,
                 password: action.payload,
-                passwordFieldMessage: ''
             }
         case 'CHANGE_LOGIN_INPUT_VALUE':
             return {
                 ...state.loginForm,
                 login: action.payload,
-                loginFieldMessage: ''
-            }
-        case 'CHANGE_PASSWORD_FIELD_MESSAGE':
-            return {
-                ...state.loginForm,
-                passwordFieldMessage: 'Не может быть пустым'
-            }
-        case 'CHANGE_LOGIN_FIELD_MESSAGE':
-            return {
-                ...state.loginForm,
-                loginFieldMessage: 'Не может быть пустым'
             }
         default:
             return state.loginForm

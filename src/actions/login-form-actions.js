@@ -22,22 +22,10 @@ const changePasswordInputValue = (val) => {
         payload: val
     }
 }
-const changePasswordFieldMessage = () => {
-    return {
-        type: 'CHANGE_PASSWORD_FIELD_MESSAGE'
-    }
-}
-const changeLoginFieldMessage = () => {
-    return {
-        type: 'CHANGE_LOGIN_FIELD_MESSAGE'
-    }
-}
 export {
     fetchLoginFormSuccess,
     fetchLoginFormPending,
     fetchLoginFormError,
     changePasswordInputValue,
-    changeLoginInputValue,
-    changePasswordFieldMessage,
-    changeLoginFieldMessage
+    changeLoginInputValue
 }
