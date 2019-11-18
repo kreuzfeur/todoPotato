@@ -6,7 +6,8 @@ const updateAddUserForm = (state, action) => {
             password_confirmation: '',
             roles: [],
             loading: false,
-            serverMessage: '',
+            responseErrorMessage: null,
+            responseSuccessMessage: null,
             roleId: 1
         }
     }
@@ -33,43 +34,37 @@ const updateAddUserForm = (state, action) => {
                 ...state.addUserForm,
                 loading: false,
                 roles: action.payload,
-                serverMessage: ''
             }
         case 'FETCH_ADD_USER_FORM_GET_ROLES_PENDING':
             return {
                 ...state.addUserForm,
                 loading: true,
-                serverMessage: ''
             }
         case 'FETCH_ADD_USER_FORM_GET_ROLES_ERROR':
             return {
                 ...state.addUserForm,
                 loading: false,
-                serverMessage: action.payload
+                responseErrorMessage: action.payload
             }
         case 'ADD_USER_FORM_LOGIN_INPUT_CHANGE':
             return {
                 ...state.addUserForm,
                 login: action.payload,
-                serverMessage: ''
             }
         case 'ADD_USER_FORM_PASSWORD_INPUT_CHANGE':
             return {
                 ...state.addUserForm,
                 password: action.payload,
-                serverMessage: ''
             }
         case 'ADD_USER_FORM_PASSWORD_CONFIRMATION_INPUT_CHANGE':
             return {
                 ...state.addUserForm,
                 password_confirmation: action.payload,
-                serverMessage: ''
             }
         case 'ADD_USER_FORM_ROLE_CHANGE':
             return {
                 ...state.addUserForm,
                 roleId: action.payload,
-                serverMessage: ''
             }
         default:
             return state.addUserForm

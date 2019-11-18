@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { withBibapi, withResponseHandle } from '../hoc';
 import Loader from '../loader';
 import LoginForm from '../login-form/';
-import {ResponseHandlingMessagesContainer} from '../containers';
+import { ResponseHandlingMessagesContainer } from '../containers';
 //redux
 import { connect } from 'react-redux';
 //actions
@@ -63,22 +63,21 @@ class LoginFormContainer extends Component {
         const { loading, responseErrorMessage, responseSuccessMessage } = this.props.loginForm;
         const loadingIndicator = (loading) ? <Loader /> : null;
         return (
-            <div>
-                <ResponseHandlingMessagesContainer errors={responseErrorMessage} success={responseSuccessMessage}/>
-                <LoginForm
-                    loadingIndicator={loadingIndicator}
-                    loginForm={this.props.loginForm}
-                    changeDisabled={this.changeDisabled}
-                    onLogin={this.onLogin}
-                    onLoginChange={this.onLoginChange}
-                    onPasswordChange={this.onPasswordChange}
-                />
-            </div>
+            <LoginForm
+                loadingIndicator={loadingIndicator}
+                loginForm={this.props.loginForm}
+                changeDisabled={this.changeDisabled}
+                onLogin={this.onLogin}
+                onLoginChange={this.onLoginChange}
+                onPasswordChange={this.onPasswordChange}
+            >
+                <ResponseHandlingMessagesContainer errors={responseErrorMessage} success={responseSuccessMessage} />
+            </LoginForm>
         )
     }
 }
 
-const mapStateToProps = ({loginForm}) => {
+const mapStateToProps = ({ loginForm }) => {
     return {
         loginForm
     }

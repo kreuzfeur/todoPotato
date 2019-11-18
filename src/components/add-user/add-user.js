@@ -4,7 +4,7 @@ import React from 'react';
 import './add-user.scss';
 import logo from '../../img/logoPutcko.jpg';
 
-const AddUser = ({ onAddUser, loader, roleItems, serverMessageItems, login, password, passwordConfirmation, onLoginChange, onPasswordChange, onPasswordConfirmationChange, changeDisabled, onRoleChange }) => {
+const AddUser = ({ onAddUser, loader, roleItems, serverMessageItems, login, password, passwordConfirmation, onLoginChange, onPasswordChange, onPasswordConfirmationChange, changeDisabled, onRoleChange}) => {
     return (
         <section className="addUser row">
             <div className="col-5 text-center">

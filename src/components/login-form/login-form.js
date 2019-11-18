@@ -4,10 +4,11 @@ import React from 'react';
 import './login-form.scss';
 import logo from '../../img/logoPutcko.jpg';
 
-const LoginForm = ({loginForm, loadingIndicator, changeDisabled, onLogin, onLoginChange, onPasswordChange}) => {
+const LoginForm = ({loginForm, loadingIndicator, changeDisabled, onLogin, onLoginChange, onPasswordChange, children}) => {
     const { login, password, serverMessage } = loginForm;
     return (
         <form className="loginForm" onSubmit={onLogin}>
+            {children}
             <div className='formContainer'>
                 {loadingIndicator}
                 <img src={logo} alt="logo putcko" className='mb-2 mt-2' />

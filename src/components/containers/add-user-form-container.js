@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 //components
 import AddUser from '../add-user';
 import Loader from '../loader';
+import ResponseHandlingMessagesContainer from '../response-handling-messages';
 //services
-import { withBibapi, withResponseHandle} from '../hoc';
+import { withBibapi, withResponseHandle, } from '../hoc';
 //redux
 import { connect } from 'react-redux';
 import {
@@ -23,33 +24,31 @@ import {
 class AddUserContainer extends Component {
     componentDidMount() {
         document.title = 'Добавить пользователя';
-        const { fetchAddUserFormGetRolesPending, fetchAddUserFormGetRolesError, fetchAddUserFormGetRolesSuccess, responseHandleSuccess } = this.props;
+        const { fetchAddUserFormGetRolesPending, fetchAddUserFormGetRolesError, fetchAddUserFormGetRolesSuccess, responseHandleSuccess, responseHandleError } = this.props;
         fetchAddUserFormGetRolesPending()
         this.props.bibapi.getRoles()
             .then(response => {
-
-                return fetchAddUserFormGetRolesSuccess(response)
+                const data = responseHandleSuccess(response)
+                return fetchAddUserFormGetRolesSuccess(data)
             })
-            .catch(({ response }) => {
-                if (!response) return fetchAddUserFormGetRolesError('говно');
-                if (response.status === 401 || response.status === 403) {
-                    localStorage.clear();
-                    return this.props.history.push('/login');
-                }
-                fetchAddUserFormGetRolesError(response.data.error.message)
+            .catch((response) => {
+                const data = responseHandleError(response);
+                fetchAddUserFormGetRolesError(data)
             });
-            
+
     }
     onAddUser = (evt) => {
         evt.preventDefault();
-        const { fetchAddUserFormPending, fetchAddUserFormSuccess, fetchAddUserFormError, login, password, passwordConfirmation, roleId } = this.props;
+        const { fetchAddUserFormPending, fetchAddUserFormSuccess, fetchAddUserFormError, login, password, passwordConfirmation, roleId, responseHandleSuccess, responseHandleError } = this.props;
         fetchAddUserFormPending()
         this.props.bibapi.addUser(login, password, passwordConfirmation, roleId)
-            .then(response => fetchAddUserFormSuccess(response))
-            .catch(({ response }) => {
-  
-                const { data: { error: { message } } } = response;
-                fetchAddUserFormError(message);
+            .then(response => {
+                const data = responseHandleSuccess(response);
+                fetchAddUserFormSuccess(data);
+            })
+            .catch((response) => {
+                const data = responseHandleError(response)
+                fetchAddUserFormError(data);
             })
 
     }
@@ -74,26 +73,16 @@ class AddUserContainer extends Component {
         }
     }
     render() {
-        const { loading, roles, serverMessage, login, password, passwordConfirmation } = this.props;
+        const { loading, roles, login, password, responseErrorMessage, responseSuccessMessage, passwordConfirmation } = this.props;
         const loader = (loading) ? <Loader /> : null;
-        // const roleItems = roles.map(({ role, id }) => {
-        //     return (<option key={id} value={id}>{role}</option>)
-        // })
-        const roleItems = null
-        let serverMessageItems = null;
-        if (serverMessage) {
-            for (const key in serverMessage) {
-                serverMessageItems = serverMessage[key].map((err, id) => {
-                    return <small className="form-text text-danger text-center" key={id}>{err}</small>
-                })
-            }
-        }
+        const roleItems = roles.map(({ role, id }) => {
+            return (<option key={id} value={id}>{role}</option>)
+        })
         return (
             <AddUser
                 onAddUser={this.onAddUser}
                 loader={loader}
                 roleItems={roleItems}
-                serverMessageItems={serverMessageItems}
                 login={login}
                 password={password}
                 passwordConfirmation={passwordConfirmation}
@@ -102,18 +91,21 @@ class AddUserContainer extends Component {
                 onPasswordConfirmationChange={this.onPasswordConfrimationChange}
                 changeDisabled={this.changeDisabled}
                 onRoleChange={this.onRoleChange}
-            />
+            >
+                <ResponseHandlingMessagesContainer errors={responseErrorMessage} success={responseSuccessMessage} />
+            </AddUser>
         )
     }
 }
-const mapStateToProps = ({ addUserForm: { loading, roles, serverMessage, login, password, password_confirmation: passwordConfirmation, roleId } }) => {
+const mapStateToProps = ({ addUserForm: { loading, roles, responseErrorMessage, responseSuccessMessage, login, password, password_confirmation: passwordConfirmation, roleId } }) => {
     return {
         loading,
         roles,
-        serverMessage,
+        passwordConfirmation,
         password,
         login,
-        passwordConfirmation,
+        responseErrorMessage,
+        responseSuccessMessage,
         roleId
     }
 }

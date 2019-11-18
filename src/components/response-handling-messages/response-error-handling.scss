@@ -1,0 +1,17 @@
+.responseHandlingMessage{
+    position: absolute;
+    width: 90%;
+    margin: 0 auto;
+    top: 2%;
+    z-index: 100;
+    .alert{
+        opacity: 0;
+        transition: all ease-in 300ms;
+        transform: translateY(-15px);
+        &.show{
+            transform: translateY(0px);
+            opacity: 1;
+        }
+    }
+    
+}

@@ -15,13 +15,12 @@ export default class Bibapi {
         });
     }
     getRoles = async () => {
-        const roles = await axios(
+        return axios(
             {
                 method: 'get',
                 url: '/roles',
             }
         )
-        return this._transformRoles(roles.data)
     }
     addUser = (username, password, password_confirmation, role_id) => {
         return axios({
@@ -32,24 +31,6 @@ export default class Bibapi {
                 password,
                 password_confirmation,
                 role_id
-            }
-        })
-    }
-    _transformRoles = (roles) => {
-        return roles.map(role => {
-            switch (role.role) {
-                case 'admin':
-                    return {
-                        ...role,
-                        role: 'администратор'
-                    }
-                case 'user':
-                    return {
-                        ...role,
-                        role: 'пользователь'
-                    }
-                default:
-                    return role
             }
         })
     }

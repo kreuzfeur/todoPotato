@@ -9,7 +9,7 @@ const withResponseHandle = (Wrapped) => {
         const responseHandleError = ({ response: { status, data } }) => {
             switch (status) {
                 case '401':
-                case '403':
+                case 403:
                     localStorage.clear();
                     return props.history.push('/login');
                 default:
