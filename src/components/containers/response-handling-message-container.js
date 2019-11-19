@@ -34,29 +34,28 @@ export default class ResponseHandlingMessagesContainer extends Component {
     }
     render() {
         const { errors, success } = this.state;
-        let errorItems = null;
-        let successItems = null;
+        let messagesItems  = null;
         if (errors || success) {
-            
-            if (typeof errors === 'string') {
+            const messages = errors || success
+            if (typeof messages === 'string') {
                 setTimeout(() => {
                     if (!this.state.show) {
                         this.setState({ show: "show" })
                     }
                 }, 1)
-                errorItems = (<ResponseHandlingMessage message={errors} allertTypeClass="alert-danger" onClose={this.onClose} show={this.state.show} id={0} />);
-            } else if (typeof errors === 'object') {
-                errorItems = [];
-                for (const type in errors) {
-                    errors[type].forEach((error, id) => {
+                messagesItems = (<ResponseHandlingMessage message={messages} allertTypeClass={`alert-${(errors) ? 'danger': 'success'}`} onClose={this.onClose} show={this.state.show} id={0} />);
+            } else if (typeof messages === 'object') {
+                messagesItems = [];
+                for (const type in messages) {
+                    messages[type].forEach((message, id) => {
                         setTimeout(() => {
                             if (!this.state.show) {
                                 this.setState({ show: "show" })
                             }
                         }, 1)
-                        errorItems.push(
+                        messagesItems.push(
                             <ResponseHandlingMessage 
-                                message={error} 
+                                message={message} 
                                 allertTypeClass="alert-danger" 
                                 onClose={this.onClose} 
                                 show={this.state.show} 
@@ -69,8 +68,7 @@ export default class ResponseHandlingMessagesContainer extends Component {
         }
         return (
             <section className="responseHandlingMessage">
-                {errorItems}
-                {successItems}
+                {messagesItems}
             </section>
         )
     }
