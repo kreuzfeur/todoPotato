@@ -4,7 +4,7 @@ import React from 'react';
 import './login-form.scss';
 import logo from '../../img/logoPutcko.jpg';
 
-const LoginForm = ({loginForm, loadingIndicator, changeDisabled, onLogin, onLoginChange, onPasswordChange, children}) => {
+const LoginForm = ({loginForm, loadingIndicator, onLogin, onLoginChange, onPasswordChange, children, changeDisabled}) => {
     const { login, password, serverMessage } = loginForm;
     return (
         <form className="loginForm" onSubmit={onLogin}>
@@ -34,7 +34,7 @@ const LoginForm = ({loginForm, loadingIndicator, changeDisabled, onLogin, onLogi
                         value={password}>
                     </input>
                 </div>
-                <button type="submit" className="btn btn-outline-success btn-block" disabled={changeDisabled()}>Войти</button>
+                <button type="submit" className="btn btn-outline-success btn-block" disabled={!changeDisabled}>Войти</button>
                 <small className="form-text text-danger text-center">{serverMessage}</small>
             </div>
         </form>

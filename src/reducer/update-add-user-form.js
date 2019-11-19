@@ -15,7 +15,8 @@ const updateAddUserForm = (state, action) => {
         case 'FETCH_ADD_USER_FORM_SUCCESS':
             return {
                 ...state.addUserForm,
-                serverMessage: action.payload,
+                responseSuccessMessage: action.payload,
+                responseErrorMessage: null,
                 loading: false
             }
         case 'FETCH_ADD_USER_FORM_PENDING':
@@ -26,7 +27,8 @@ const updateAddUserForm = (state, action) => {
         case 'FETCH_ADD_USER_FORM_ERROR':
             return {
                 ...state.addUserForm,
-                serverMessage: action.payload,
+                responseSuccessMessage: null,
+                responseErrorMessage: action.payload,
                 loading: false
             }
         case 'FETCH_ADD_USER_FORM_GET_ROLES_SUCCESS':
@@ -34,17 +36,6 @@ const updateAddUserForm = (state, action) => {
                 ...state.addUserForm,
                 loading: false,
                 roles: action.payload,
-            }
-        case 'FETCH_ADD_USER_FORM_GET_ROLES_PENDING':
-            return {
-                ...state.addUserForm,
-                loading: true,
-            }
-        case 'FETCH_ADD_USER_FORM_GET_ROLES_ERROR':
-            return {
-                ...state.addUserForm,
-                loading: false,
-                responseErrorMessage: action.payload
             }
         case 'ADD_USER_FORM_LOGIN_INPUT_CHANGE':
             return {

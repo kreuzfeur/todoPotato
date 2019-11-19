@@ -4,12 +4,8 @@ import {
     fetchLoginFormError,
     changePasswordInputValue,
     changeLoginInputValue,
-    changePasswordFieldMessage,
-    changeLoginFieldMessage
 } from './login-form-actions';
 import {
-    fetchAddUserFormGetRolesPending,
-    fetchAddUserFormGetRolesError,
     fetchAddUserFormGetRolesSuccess,
     fetchAddUserFormPending,
     fetchAddUserFormSuccess,
@@ -26,8 +22,6 @@ export {
     fetchLoginFormError,
     changePasswordInputValue,
     changeLoginInputValue,
-    fetchAddUserFormGetRolesPending,
-    fetchAddUserFormGetRolesError,
     fetchAddUserFormGetRolesSuccess,
     fetchAddUserFormPending,
     fetchAddUserFormSuccess,

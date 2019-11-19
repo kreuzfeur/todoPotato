@@ -3,14 +3,12 @@ import React, { Component } from 'react';
 //components
 import AddUser from '../add-user';
 import Loader from '../loader';
-import ResponseHandlingMessagesContainer from '../response-handling-messages';
+import {ResponseHandlingMessagesContainer} from '../../components/containers';
 //services
-import { withBibapi, withResponseHandle, } from '../hoc';
+import { withBibapi, withResponseHandle, withValidatorService } from '../hoc';
 //redux
 import { connect } from 'react-redux';
 import {
-    fetchAddUserFormGetRolesPending,
-    fetchAddUserFormGetRolesError,
     fetchAddUserFormGetRolesSuccess,
     fetchAddUserFormPending,
     fetchAddUserFormSuccess,
@@ -24,8 +22,8 @@ import {
 class AddUserContainer extends Component {
     componentDidMount() {
         document.title = 'Добавить пользователя';
-        const { fetchAddUserFormGetRolesPending, fetchAddUserFormGetRolesError, fetchAddUserFormGetRolesSuccess, responseHandleSuccess, responseHandleError } = this.props;
-        fetchAddUserFormGetRolesPending()
+        const { fetchAddUserFormPending, fetchAddUserFormError, fetchAddUserFormGetRolesSuccess, responseHandleSuccess, responseHandleError } = this.props;
+        fetchAddUserFormPending()
         this.props.bibapi.getRoles()
             .then(response => {
                 const data = responseHandleSuccess(response)
@@ -33,7 +31,7 @@ class AddUserContainer extends Component {
             })
             .catch((response) => {
                 const data = responseHandleError(response);
-                fetchAddUserFormGetRolesError(data)
+                fetchAddUserFormError(data)
             });
 
     }
@@ -64,20 +62,13 @@ class AddUserContainer extends Component {
     onRoleChange = (roleId) => {
         this.props.changeRole(roleId)
     }
-    changeDisabled = () => {
-        const { login, password, passwordConfirmation } = this.props;
-        if (login && password && passwordConfirmation) {
-            return false
-        } else {
-            return true
-        }
-    }
     render() {
         const { loading, roles, login, password, responseErrorMessage, responseSuccessMessage, passwordConfirmation } = this.props;
         const loader = (loading) ? <Loader /> : null;
         const roleItems = roles.map(({ role, id }) => {
             return (<option key={id} value={id}>{role}</option>)
         })
+        const changeDisabled = this.props.validator.isEmpty([login, password, passwordConfirmation]);
         return (
             <AddUser
                 onAddUser={this.onAddUser}
@@ -89,7 +80,7 @@ class AddUserContainer extends Component {
                 onLoginChange={this.onLoginChange}
                 onPasswordChange={this.onPasswordChange}
                 onPasswordConfirmationChange={this.onPasswordConfrimationChange}
-                changeDisabled={this.changeDisabled}
+                changeDisabled={changeDisabled}
                 onRoleChange={this.onRoleChange}
             >
                 <ResponseHandlingMessagesContainer errors={responseErrorMessage} success={responseSuccessMessage} />
@@ -110,8 +101,6 @@ const mapStateToProps = ({ addUserForm: { loading, roles, responseErrorMessage, 
     }
 }
 const mapDispatchToProps = {
-    fetchAddUserFormGetRolesPending,
-    fetchAddUserFormGetRolesError,
     fetchAddUserFormGetRolesSuccess,
     addUserFormLoginInputChange,
     addUserFormPasswordInputChange,
@@ -121,4 +110,4 @@ const mapDispatchToProps = {
     fetchAddUserFormError,
     changeRole
 }
-export default connect(mapStateToProps, mapDispatchToProps)(withResponseHandle(withBibapi(AddUserContainer)));
+export default connect(mapStateToProps, mapDispatchToProps)(withResponseHandle(withBibapi(withValidatorService(AddUserContainer))));

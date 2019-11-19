@@ -1,18 +1,7 @@
-const fetchAddUserFormGetRolesPending = () => {
-    return {
-        type: "FETCH_ADD_USER_FORM_GET_ROLES_PENDING"
-    }
-}
 const fetchAddUserFormGetRolesSuccess = (data) => {
     return {
         type: "FETCH_ADD_USER_FORM_GET_ROLES_SUCCESS",
         payload: data
-    }
-}
-const fetchAddUserFormGetRolesError = (error) => {
-    return {
-        type: "FETCH_ADD_USER_FORM_GET_ROLES_ERROR",
-        payload: error
     }
 }
 const fetchAddUserFormPending = () => {
@@ -21,14 +10,12 @@ const fetchAddUserFormPending = () => {
     }
 }
 const fetchAddUserFormSuccess = (response) => {
-    console.log(response)
     return {
         type: 'FETCH_ADD_USER_FORM_SUCCESS',
         payload: response
     }
 }
 const fetchAddUserFormError = (error) => {
-    // console.log(error)
     return {
         type: 'FETCH_ADD_USER_FORM_ERROR',
         payload: error
@@ -59,8 +46,6 @@ const changeRole = (roleId) => {
     }
 }
 export {
-    fetchAddUserFormGetRolesPending,
-    fetchAddUserFormGetRolesError,
     fetchAddUserFormGetRolesSuccess,
     fetchAddUserFormPending,
     fetchAddUserFormSuccess,

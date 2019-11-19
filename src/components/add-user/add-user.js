@@ -4,9 +4,10 @@ import React from 'react';
 import './add-user.scss';
 import logo from '../../img/logoPutcko.jpg';
 
-const AddUser = ({ onAddUser, loader, roleItems, serverMessageItems, login, password, passwordConfirmation, onLoginChange, onPasswordChange, onPasswordConfirmationChange, changeDisabled, onRoleChange}) => {
+const AddUser = ({ onAddUser, loader, roleItems, serverMessageItems, login, password, passwordConfirmation, onLoginChange, onPasswordChange, onPasswordConfirmationChange, changeDisabled, onRoleChange, children}) => {
     return (
         <section className="addUser row">
+            {children}
             <div className="col-5 text-center">
                 <img src={logo} alt="Логотип Пуцко" />
                 <h1>Добавить пользователя</h1>
@@ -28,7 +29,7 @@ const AddUser = ({ onAddUser, loader, roleItems, serverMessageItems, login, pass
                             </select>
                         </div>
                         <div className="col">
-                            <button type="submit" className="btn btn-success" disabled={changeDisabled()}>Добавить</button>
+                            <button type="submit" className="btn btn-success" >Добавить</button>
                         </div>
                         <div className="col-12">
                             {serverMessageItems}

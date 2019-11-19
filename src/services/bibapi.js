@@ -4,6 +4,9 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(
 axios.defaults.headers.common['Accept'] = 'application/json';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 export default class Bibapi {
+    initAxios = (token) => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    }
     login = (username, password) => {
         return axios({
             method: 'post',
@@ -14,7 +17,7 @@ export default class Bibapi {
             }
         });
     }
-    getRoles = async () => {
+    getRoles =  () => {
         return axios(
             {
                 method: 'get',

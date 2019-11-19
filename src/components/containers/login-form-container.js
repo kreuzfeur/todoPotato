@@ -1,7 +1,7 @@
 //react
 import React, { Component } from 'react';
 //components
-import { withBibapi, withResponseHandle } from '../hoc';
+import { withBibapi, withResponseHandle, withValidatorService } from '../hoc';
 import Loader from '../loader';
 import LoginForm from '../login-form/';
 import { ResponseHandlingMessagesContainer } from '../containers';
@@ -27,17 +27,18 @@ class LoginFormContainer extends Component {
     }
     onLogin = (evt) => {
         evt.preventDefault();
-        const { fetchLoginFormPending, fetchLoginFormSuccess, fetchLoginFormError, bibapi, history, responseHandleSuccess, responseHandleError } = this.props;
+        const { fetchLoginFormPending, fetchLoginFormSuccess, bibapi, fetchLoginFormError, history, responseHandleSuccess, responseHandleError } = this.props;
         const { login, password } = this.props.loginForm;
         fetchLoginFormPending();
         bibapi.login(login, password)
             .then((response) => {
                 const data = responseHandleSuccess(response);
-                fetchLoginFormSuccess()
                 const { token, user: { username, role } } = data;
                 localStorage.setItem('token', token);
                 localStorage.setItem('username', username);
                 localStorage.setItem('role', role);
+                bibapi.initAxios(token);
+                fetchLoginFormSuccess();
                 history.push(`/${usersService.changeUrlByRole()}`);
             })
             .catch((response) => {
@@ -51,22 +52,15 @@ class LoginFormContainer extends Component {
     onPasswordChange = (evt) => {
         this.props.changePasswordInputValue(evt.target.value)
     }
-    changeDisabled = () => {
-        const { login, password } = this.props.loginForm;
-        if (login && password) {
-            return false
-        } else {
-            return true
-        }
-    }
     render() {
-        const { loading, responseErrorMessage, responseSuccessMessage } = this.props.loginForm;
+        const { loading, responseErrorMessage, responseSuccessMessage, login, password } = this.props.loginForm;
         const loadingIndicator = (loading) ? <Loader /> : null;
+        const changeDisabled = this.props.validator.isEmpty([login, password]);
         return (
             <LoginForm
                 loadingIndicator={loadingIndicator}
                 loginForm={this.props.loginForm}
-                changeDisabled={this.changeDisabled}
+                changeDisabled={changeDisabled}
                 onLogin={this.onLogin}
                 onLoginChange={this.onLoginChange}
                 onPasswordChange={this.onPasswordChange}
@@ -89,4 +83,4 @@ const mapDispatchToPRops = {
     changePasswordInputValue,
     changeLoginInputValue,
 }
-export default connect(mapStateToProps, mapDispatchToPRops)(withRouter(withResponseHandle(withBibapi(LoginFormContainer))));
+export default connect(mapStateToProps, mapDispatchToPRops)(withRouter(withResponseHandle(withBibapi(withValidatorService(LoginFormContainer)))));
