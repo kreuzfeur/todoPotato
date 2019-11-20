@@ -17,7 +17,7 @@ export default class Bibapi {
             }
         });
     }
-    getRoles =  () => {
+    getRoles = () => {
         return axios(
             {
                 method: 'get',
@@ -35,6 +35,12 @@ export default class Bibapi {
                 password_confirmation,
                 role_id
             }
+        })
+    }
+    getUsers = () => {
+        return axios({
+            method: 'get',
+            url: '/users'
         })
     }
 } 

@@ -29,7 +29,7 @@ const AddUser = ({ onAddUser, loader, roleItems, serverMessageItems, login, pass
                             </select>
                         </div>
                         <div className="col">
-                            <button type="submit" className="btn btn-success" >Добавить</button>
+                            <button type="submit" className="btn btn-success" disabled={!changeDisabled}>Добавить</button>
                         </div>
                         <div className="col-12">
                             {serverMessageItems}

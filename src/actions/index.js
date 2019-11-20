@@ -15,7 +15,11 @@ import {
     addUserFormPasswordConfirmationInputChange,
     changeRole
 
-} from './add-user-form-actions'
+} from './add-user-form-actions';
+import {
+    editUserDataPending,
+    editUserDataSuccess
+} from './edit-user-actions';
 export {
     fetchLoginFormSuccess,
     fetchLoginFormPending,
@@ -29,5 +33,7 @@ export {
     addUserFormLoginInputChange,
     addUserFormPasswordInputChange,
     addUserFormPasswordConfirmationInputChange,
-    changeRole
+    changeRole,
+    editUserDataPending,
+    editUserDataSuccess
 }
