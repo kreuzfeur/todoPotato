@@ -15,11 +15,10 @@ const editUserDataError = (data) => {
         payload: data
     }
 }
-const editUserGetGlobalRolesSuccess = (data, successMessage = null) => {
+const editUserGetGlobalRolesSuccess = (data) => {
     return {
         type: 'EDIT_USER_GET_GLOBAL_ROLES_SUCCESS',
-        payload: data,
-        successMessage: successMessage
+        payload: data
     }
 }
 const editUserDeleteUser = (userId) => {
@@ -28,10 +27,17 @@ const editUserDeleteUser = (userId) => {
         payload: userId
     }
 }
+const editUserSuccessMessage = (message) => {
+    return {
+        type: 'EDIT_USER_SUCCESS_MESSAGE',
+        payload: message
+    }
+}
 export {
     editUserDataPending,
     editUserDataSuccess,
     editUserGetGlobalRolesSuccess,
     editUserDataError,
-    editUserDeleteUser
+    editUserDeleteUser,
+    editUserSuccessMessage
 }

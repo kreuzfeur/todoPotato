@@ -21,7 +21,8 @@ import {
     editUserDataSuccess,
     editUserGetGlobalRolesSuccess,
     editUserDataError,
-    editUserDeleteUser
+    editUserDeleteUser,
+    editUserSuccessMessage
 } from './edit-user-actions';
 export {
     fetchLoginFormSuccess,
@@ -41,5 +42,6 @@ export {
     editUserDataSuccess,
     editUserGetGlobalRolesSuccess,
     editUserDataError,
-    editUserDeleteUser
+    editUserDeleteUser,
+    editUserSuccessMessage
 }

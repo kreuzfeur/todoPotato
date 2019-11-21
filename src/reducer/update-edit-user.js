@@ -11,7 +11,6 @@ const updateEditUser = (state, action) => {
             responseSuccessMessage: null
         }
     }
-    // console.log(state.editUser)
     switch (action.type) {
         case 'EDIT_USER_DATA_PENDING':
             return {
@@ -22,8 +21,7 @@ const updateEditUser = (state, action) => {
             return {
                 ...state.editUser,
                 loading: false,
-                data: action.payload,
-                // responseErrorMessage: acti
+                data: action.payload
             }
         case 'EDIT_USER_DATA_ERROR':
             return {
@@ -44,6 +42,11 @@ const updateEditUser = (state, action) => {
                     ...state.editUser.data,
                     users: newUsers
                 }
+            }
+        case 'EDIT_USER_SUCCESS_MESSAGE':
+            return {
+                ...state.editUser,
+                responseSuccessMessage: action.payload
             }
         default:
             return state.editUser

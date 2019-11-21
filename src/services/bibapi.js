@@ -49,4 +49,15 @@ export default class Bibapi {
             url: `/user/${userId}`
         })
     }
+    editUser = (userId, password, password_confirmation, role_id) => {
+        return axios({
+            method: 'put',
+            url: `/user/${userId}`,
+            data: {
+                password,
+                password_confirmation,
+                role_id
+            }
+        })
+    }
 } 
