@@ -36,7 +36,7 @@ class LoginFormContainer extends Component {
                 const { token, user: { username, role } } = data;
                 localStorage.setItem('token', token);
                 localStorage.setItem('username', username);
-                localStorage.setItem('role', role);
+                localStorage.setItem('role', role.role);
                 bibapi.initAxios(token);
                 fetchLoginFormSuccess();
                 history.push(`/${usersService.changeUrlByRole()}`);

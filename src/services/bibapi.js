@@ -43,4 +43,10 @@ export default class Bibapi {
             url: '/users'
         })
     }
+    deleteUser = (userId) => {
+        return axios({
+            method: 'delete',
+            url: `/user/${userId}`
+        })
+    }
 } 

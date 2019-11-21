@@ -8,9 +8,17 @@ export default class ResponseHandlingMessagesContainer extends Component {
         errors: null,
         success: null
     }
+    componentDidMount() {
+        const { errors, success } = this.props;
+        this.setState({
+            errors,
+            success
+        })
+    }
     componentDidUpdate(prevProps) {
         if (prevProps.errors !== this.props.errors || prevProps.success !== this.props.success) {
             const { errors, success } = this.props;
+            // console.log(errors)
             this.setState({
                 errors,
                 success
@@ -19,22 +27,23 @@ export default class ResponseHandlingMessagesContainer extends Component {
     }
     onClose = (id, type) => {
         const newErrors = {};
-        const {errors} = this.state;
-        if(type){
+        const { errors } = this.state;
+        if (type) {
             const deleteElement = errors[type][id];
             for (const key in errors) {
                 errors[key].forEach(elt => {
-                    if (elt !== deleteElement){
+                    if (elt !== deleteElement) {
                         newErrors[key] = [elt]
                     }
                 })
             }
         }
-        this.setState({errors: newErrors})
+        this.setState({ errors: newErrors })
     }
     render() {
         const { errors, success } = this.state;
-        let messagesItems  = null;
+        // console.log(errors)
+        let messagesItems = null;
         if (errors || success) {
             const messages = errors || success
             if (typeof messages === 'string') {
@@ -43,7 +52,7 @@ export default class ResponseHandlingMessagesContainer extends Component {
                         this.setState({ show: "show" })
                     }
                 }, 1)
-                messagesItems = (<ResponseHandlingMessage message={messages} allertTypeClass={`alert-${(errors) ? 'danger': 'success'}`} onClose={this.onClose} show={this.state.show} id={0} />);
+                messagesItems = (<ResponseHandlingMessage message={messages} allertTypeClass={`alert-${(errors) ? 'danger' : 'success'}`} onClose={this.onClose} show={this.state.show} id={0} />);
             } else if (typeof messages === 'object') {
                 messagesItems = [];
                 for (const type in messages) {
@@ -54,13 +63,13 @@ export default class ResponseHandlingMessagesContainer extends Component {
                             }
                         }, 1)
                         messagesItems.push(
-                            <ResponseHandlingMessage 
-                                message={message} 
-                                allertTypeClass="alert-danger" 
-                                onClose={this.onClose} 
-                                show={this.state.show} 
-                                id={id} 
-                                key={Math.random() * 10} 
+                            <ResponseHandlingMessage
+                                message={message}
+                                allertTypeClass="alert-danger"
+                                onClose={this.onClose}
+                                show={this.state.show}
+                                id={id}
+                                key={Math.random() * 10}
                                 type={type} />)
                     });
                 }

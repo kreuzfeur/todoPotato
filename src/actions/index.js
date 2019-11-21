@@ -18,7 +18,10 @@ import {
 } from './add-user-form-actions';
 import {
     editUserDataPending,
-    editUserDataSuccess
+    editUserDataSuccess,
+    editUserGetGlobalRolesSuccess,
+    editUserDataError,
+    editUserDeleteUser
 } from './edit-user-actions';
 export {
     fetchLoginFormSuccess,
@@ -35,5 +38,8 @@ export {
     addUserFormPasswordConfirmationInputChange,
     changeRole,
     editUserDataPending,
-    editUserDataSuccess
+    editUserDataSuccess,
+    editUserGetGlobalRolesSuccess,
+    editUserDataError,
+    editUserDeleteUser
 }
