@@ -40,7 +40,13 @@ export default class EditUserRow extends Component {
         this.setState({ data: newData })
     }
     onRoleChange = (roleId) => {
-        this.setState({ roleId })
+        this.setState({ 
+            ...this.state,
+            data: {
+                ...this.state.data,
+                roleId
+            }
+         })
     }
     isDisabled = () => (this.props.username === 'admin' ? true : false);
     enableSave = () => this.setState({ onSaveDisabled: false })
@@ -93,7 +99,6 @@ export default class EditUserRow extends Component {
                         className="btn btn-success" 
                         disabled={this.state.onSaveDisabled} 
                         onClick={() => {
-                            onSave(data)
                             const newData = {
                                 ...this.state.data,
                                 password: '',
@@ -103,6 +108,7 @@ export default class EditUserRow extends Component {
                                 onSaveDisabled: true,
                                 data: newData
                             })
+                            onSave(data)
                         }}
                     >
                         <FontAwesomeIcon icon={faSave} />

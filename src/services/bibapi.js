@@ -46,18 +46,26 @@ export default class Bibapi {
     deleteUser = (userId) => {
         return axios({
             method: 'delete',
-            url: `/user/${userId}`
+            url: `/users/${userId}`
         })
     }
     editUser = (userId, password, password_confirmation, role_id) => {
-        return axios({
-            method: 'put',
-            url: `/user/${userId}`,
-            data: {
+        let data = {};
+        if (!password) {
+            data = {
+                role_id
+            }
+        } else {
+            data = {
                 password,
                 password_confirmation,
                 role_id
             }
+        }
+        return axios({
+            method: 'put',
+            url: `/users/${userId}`,
+            data
         })
     }
 } 

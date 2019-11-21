@@ -53,6 +53,7 @@ class EditUserContainer extends Component {
             })
     }
     onSave = ({ password, passwordConfirmation, userId, roleId }) => {
+        console.log(roleId)
         const { editUserDataError, bibapi, responseHandleError, editUserSuccessMessage, responseHandleSuccess } = this.props;
         if (password === passwordConfirmation) {
             bibapi.editUser(userId, password, passwordConfirmation, roleId)
