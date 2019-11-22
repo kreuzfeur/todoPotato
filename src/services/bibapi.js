@@ -37,10 +37,10 @@ export default class Bibapi {
             }
         })
     }
-    getUsers = () => {
+    getUsers = (page) => {
         return axios({
             method: 'get',
-            url: '/users'
+            url: `/users`
         })
     }
     deleteUser = (userId) => {

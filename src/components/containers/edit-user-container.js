@@ -11,8 +11,10 @@ import axios from 'axios';
 import Loader from '../loader';
 import { ResponseHandlingMessagesContainer } from '../containers';
 import EditUserRow from '../edit-user/edit-user-row/';
+import PagePaginator from '../page-paginator';
 //styles
 import EditUser from '../edit-user/edit-user';
+
 
 class EditUserContainer extends Component {
     getAllUsers = () => {
@@ -53,7 +55,6 @@ class EditUserContainer extends Component {
             })
     }
     onSave = ({ password, passwordConfirmation, userId, roleId }) => {
-        console.log(roleId)
         const { editUserDataError, bibapi, responseHandleError, editUserSuccessMessage, responseHandleSuccess } = this.props;
         if (password === passwordConfirmation) {
             bibapi.editUser(userId, password, passwordConfirmation, roleId)
@@ -96,6 +97,7 @@ class EditUserContainer extends Component {
         return (
             <EditUser loader={loader} users={users}>
                 <ResponseHandlingMessagesContainer errors={responseErrorMessage} success={responseSuccessMessage} />
+                <PagePaginator/>
             </EditUser>
         )
     }

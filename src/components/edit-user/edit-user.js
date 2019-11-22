@@ -7,8 +7,8 @@ const EditUser = ({loader, users, children}) => {
         return (      
             <section className="editUser row">
                 {children}
+                {loader}
                 <div className="col-6">
-                    {loader}
                     <table className="table table-hover text-center">
                         <thead>
                             <tr >
