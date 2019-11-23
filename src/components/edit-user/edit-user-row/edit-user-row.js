@@ -48,7 +48,7 @@ export default class EditUserRow extends Component {
             }
          })
     }
-    //test jen
+    //test je
     isDisabled = () => (this.props.username === 'admin' ? true : false);
     enableSave = () => this.setState({ onSaveDisabled: false })
     render() {
