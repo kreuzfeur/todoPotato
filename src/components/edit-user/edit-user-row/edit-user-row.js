@@ -48,6 +48,7 @@ export default class EditUserRow extends Component {
             }
          })
     }
+    //test jenkins
     isDisabled = () => (this.props.username === 'admin' ? true : false);
     enableSave = () => this.setState({ onSaveDisabled: false })
     render() {
