@@ -25,6 +25,7 @@ export default class Bibapi {
             }
         )
     }
+    //test
     addUser = (username, password, password_confirmation, role_id) => {
         return axios({
             method: 'post',
