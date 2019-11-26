@@ -17,12 +17,12 @@ import EditUser from '../edit-user/edit-user';
 
 
 class EditUserContainer extends Component {
-    getAllUsers = () => {
+    getAllUsers = (page) => {
         const { bibapi, responseHandleSuccess, responseHandleError, editUserDataPending, editUserDataSuccess, editUserGetGlobalRolesSuccess, editUserDataError } = this.props;
         const { getRoles, getUsers } = bibapi;
         editUserDataPending();
         axios.all([
-            getUsers(),
+            getUsers(page),
             getRoles()
         ])
             .then(([usersDataResponse, rolesDataResponse]) => {
@@ -38,7 +38,13 @@ class EditUserContainer extends Component {
             })
     }
     componentDidMount() {
-        this.getAllUsers()
+        const page = this.props.match.params.id;
+        this.getAllUsers(page);
+    }
+    componentDidUpdate (prevProps) {
+        if(this.props.match.params.id !== prevProps.match.params.id){
+            this.getAllUsers(this.props.match.params.id);
+        }
     }
     onDelete = (userId) => {
         const { bibapi, responseHandleSuccess, responseHandleError, editUserDeleteUser, editUserDataError, editUserSuccessMessage } = this.props;
@@ -94,10 +100,11 @@ class EditUserContainer extends Component {
                 )
             });
         }
+        // console.log(data.page)
         return (
             <EditUser loader={loader} users={users}>
                 <ResponseHandlingMessagesContainer errors={responseErrorMessage} success={responseSuccessMessage} />
-                <PagePaginator/>
+                <PagePaginator page={data.page} totalPages={data.total_pages} onPageChange={this.onPageChange} url='/adminPanel/editUser/page/'/>
             </EditUser>
         )
     }

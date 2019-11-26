@@ -5,7 +5,7 @@ const reducer = (state, action) => {
     return {
         loginForm: updateLoginForm(state, action),
         addUserForm: upadteAddUserForm(state, action),
-        editUser: updateEditUser(state, action)
+        editUser: updateEditUser(state, action),
     }
 }
 export default reducer;

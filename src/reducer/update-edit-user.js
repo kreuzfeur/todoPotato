@@ -5,12 +5,15 @@ const updateEditUser = (state, action) => {
     if (state === undefined) {
         return {
             loading: true,
-            data: [],
+            data: {
+                page: 1
+            },
             globalRoles: [],
             responseErrorMessage: null,
             responseSuccessMessage: null
         }
     }
+
     switch (action.type) {
         case 'EDIT_USER_DATA_PENDING':
             return {

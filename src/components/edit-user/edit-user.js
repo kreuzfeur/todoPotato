@@ -6,7 +6,7 @@ import './edit-user.scss';
 const EditUser = ({loader, users, children}) => {
         return (      
             <section className="editUser row">
-                {children}
+                {children[0]}
                 {loader}
                 <div className="col-6">
                     <table className="table table-hover text-center">
@@ -24,6 +24,7 @@ const EditUser = ({loader, users, children}) => {
                         </tbody>
                     </table>
                 </div>
+                {children[1]}
             </section >
         )
 }
