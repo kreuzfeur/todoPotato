@@ -6,7 +6,7 @@ const updateEditUser = (state, action) => {
         return {
             loading: true,
             data: {
-                page: 1
+                // page: 1
             },
             globalRoles: [],
             responseErrorMessage: null,

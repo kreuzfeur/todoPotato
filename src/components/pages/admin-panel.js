@@ -17,7 +17,12 @@ const AdminPanelPage = () => {
             </div>
             <Route path='/adminPanel' render={() => <Redirect to={'/adminPanel/addUser'}/>} exact/>
             <Route path='/adminPanel/addUser' component={AddUserContainer} exact/>
-            <Route path='/adminPanel/editUser/page/:id?' component={EditUserContainer} />
+
+            {/* ToDo РАЗОБРАТЬСЯ С РАУТАМИ */}
+            <Route path='/adminPanel/editUser' component={EditUserContainer} exact/>
+            <Route path='/adminPanel/editUser/page/:id' component={EditUserContainer} />
+            {/* ToDo РАЗОБРАТЬСЯ С РАУТАМИ */}
+
             <Route path='/adminPanel/another' render={() => <div>another</div>} />       
         </IsLoggedIn>
     )

@@ -12,12 +12,14 @@ import Loader from '../loader';
 import { ResponseHandlingMessagesContainer } from '../containers';
 import EditUserRow from '../edit-user/edit-user-row/';
 import PagePaginator from '../page-paginator';
+//router
+import { Redirect } from 'react-router-dom';
 //styles
 import EditUser from '../edit-user/edit-user';
 
 
 class EditUserContainer extends Component {
-    getAllUsers = (page) => {
+    getAllUsers = (page = 1) => {
         const { bibapi, responseHandleSuccess, responseHandleError, editUserDataPending, editUserDataSuccess, editUserGetGlobalRolesSuccess, editUserDataError } = this.props;
         const { getRoles, getUsers } = bibapi;
         editUserDataPending();
@@ -27,9 +29,9 @@ class EditUserContainer extends Component {
         ])
             .then(([usersDataResponse, rolesDataResponse]) => {
                 const rolesData = responseHandleSuccess(rolesDataResponse);
-                editUserGetGlobalRolesSuccess(rolesData)
                 const usersData = responseHandleSuccess(usersDataResponse);
-                editUserDataSuccess(usersData)
+                editUserGetGlobalRolesSuccess(rolesData);
+                editUserDataSuccess(usersData);
             })
             .catch(response => {
                 editUserDataError();
@@ -41,8 +43,8 @@ class EditUserContainer extends Component {
         const page = this.props.match.params.id;
         this.getAllUsers(page);
     }
-    componentDidUpdate (prevProps) {
-        if(this.props.match.params.id !== prevProps.match.params.id){
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.id !== prevProps.match.params.id) {
             this.getAllUsers(this.props.match.params.id);
         }
     }
@@ -50,10 +52,11 @@ class EditUserContainer extends Component {
         const { bibapi, responseHandleSuccess, responseHandleError, editUserDeleteUser, editUserDataError, editUserSuccessMessage } = this.props;
         bibapi.deleteUser(userId)
             .then(response => {
+                const page = this.props.match.params.id ;
                 const data = responseHandleSuccess(response);
                 editUserDeleteUser(userId);
-                this.getAllUsers()
                 editUserSuccessMessage(data);
+                this.getAllUsers(page)
             })
             .catch(response => {
                 const errorData = responseHandleError(response);
@@ -85,6 +88,10 @@ class EditUserContainer extends Component {
             }
         })
         if (!loading) {
+            if (!data.users.length && data.page > data.total_pages) {
+                // this.getAllUsers(data.total_pages);
+                return <Redirect to={`/adminPanel/editUser/page/${data.total_pages}`} />
+            }
             data.users.forEach(user => {
                 const { id, username, role } = user;
                 users.push(
@@ -97,14 +104,13 @@ class EditUserContainer extends Component {
                         onDelete={this.onDelete}
                         onSave={this.onSave}
                     />
-                )
+                );
             });
         }
-        // console.log(data.page)
         return (
             <EditUser loader={loader} users={users}>
                 <ResponseHandlingMessagesContainer errors={responseErrorMessage} success={responseSuccessMessage} />
-                <PagePaginator page={data.page} totalPages={data.total_pages} onPageChange={this.onPageChange} url='/adminPanel/editUser/page/'/>
+                <PagePaginator page={data.page} totalPages={data.total_pages} url='/adminPanel/editUser/page/' />
             </EditUser>
         )
     }

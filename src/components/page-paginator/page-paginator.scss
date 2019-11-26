@@ -1,17 +1,17 @@
-.pagePaginator {
-  display: flex;
-  justify-content: center;
-  .page-item.active .page-link {
-    background: #28a745;
-    border-color: #28a745;
-  }
-  .pagePaginatorNavLink {
-    color: #28a745;
-    &:focus {
-      box-shadow: 0 0 0 0.2rem rgba(0, 255, 161, 0.25) !important;
-    }
-    &:hover {
-        color: #17670d;
-    }
-  }
-}
+// .pagePaginator {
+//   display: flex;
+//   justify-content: center;
+//   .page-item.active .page-link {
+//     background: #28a745;
+//     border-color: #28a745;
+//   }
+//   .pagePaginatorNavLink {
+//     color: #28a745;
+//     &:focus {
+//       box-shadow: 0 0 0 0.2rem rgba(0, 255, 161, 0.25) !important;
+//     }
+//     &:hover {
+//         color: #17670d;
+//     }
+//   }
+// }

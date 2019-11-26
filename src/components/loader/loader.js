@@ -5,8 +5,8 @@ import './loader.scss';
 
 const Loader = () => {
     return (
-        <div className="loadingio-spinner-rolling-v0md1681ce">
-            <div className="ldio-prkhxh1ifx">
+        <div className="spinner-bg">
+            <div className="spinner-anim">
                 <div></div>
             </div>
         </div>

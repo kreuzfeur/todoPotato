@@ -27,14 +27,14 @@ export default class PagePaginator extends Component {
             );
         }
         return (
-            <nav className="col-12 pagePaginator">
-                <ul className={`pagination `}>
+            <nav className="col-12 pagePaginator d-flex justify-content-center">
+                <ul className="pagination">
                     <li className={`page-item ${(this.disablePrevios(page))}`}>
-                        <Link className="page-link pagePaginatorNavLink" to={`${url}${page - 1}`} >Предыдущая</Link>
+                        <Link className="page-link pagePaginatorNavLink" to={`${url}${page - 1}`} >←</Link>
                     </li>
                     {pages}
                     <li className={`page-item ${(this.disableNext(page, totalPages))}`}>
-                        <Link className="page-link pagePaginatorNavLink" to={`${url}${page + 1}`} >Следующая</Link>
+                        <Link className="page-link pagePaginatorNavLink" to={`${url}${page + 1}`} >→</Link>
                     </li>
                 </ul>
             </nav>
