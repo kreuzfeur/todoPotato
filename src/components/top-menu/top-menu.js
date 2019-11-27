@@ -16,7 +16,13 @@ const TopMenu = () => {
                     <NavLink className="nav-link" to="/adminPanel/editUser" activeClassName='active'>Изменить пользователя</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/adminPanel/another" activeClassName='active' exact>Что-то еще</NavLink>
+                    <NavLink className="nav-link" to="/adminPanel/works" activeClassName='active' exact>Работы</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link" to="/adminPanel/shipment" activeClassName='active' exact>Отгрузки</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link" to="/adminPanel/summary" activeClassName='active' exact>Производственная сводка</NavLink>
                 </li>
             </ul>
         </nav>

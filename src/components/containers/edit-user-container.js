@@ -89,7 +89,6 @@ class EditUserContainer extends Component {
         })
         if (!loading) {
             if (!data.users.length && data.page > data.total_pages) {
-                // this.getAllUsers(data.total_pages);
                 return <Redirect to={`/adminPanel/editUser/page/${data.total_pages}`} />
             }
             data.users.forEach(user => {
@@ -117,7 +116,6 @@ class EditUserContainer extends Component {
 
 }
 const mapStateToProps = ({ editUser: { loading, data, globalRoles, responseErrorMessage, responseSuccessMessage } }) => {
-    // console.log(responseSuccessMessage)
     return {
         loading,
         data,
